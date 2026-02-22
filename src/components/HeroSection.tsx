@@ -1,6 +1,6 @@
 import { useState } from "react";
-import heroImage from "@/assets/hero-backyard.jpg";
 import { Shield, Star, Phone } from "lucide-react";
+import { siteConfig } from "@/config";
 
 const HeroSection = () => {
   const [formData, setFormData] = useState({ name: "", phone: "", pest: "" });
@@ -10,8 +10,8 @@ const HeroSection = () => {
       {/* Background image */}
       <div className="absolute inset-0">
         <img
-          src={heroImage}
-          alt="Beautiful Texas backyard with family enjoying pest-free outdoor living"
+          src={siteConfig.media.heroImage}
+          alt={`Beautiful ${siteConfig.company.state} backyard with family enjoying pest-free outdoor living`}
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-dark/70 via-dark/40 to-dark/60" />
@@ -24,8 +24,8 @@ const HeroSection = () => {
           {/* Left - Headline */}
           <div className="text-center lg:text-left">
             <div className="animate-blur-up inline-flex items-center gap-2 px-4 py-2 rounded-full glass-dark mb-6 text-sm">
-              <Shield className="w-4 h-4 text-gold" />
-              <span className="text-dark-foreground">Austin's #1 Family-Safe Pest Control</span>
+              <Shield className="w-4 h-4 text-accent" />
+              <span className="text-dark-foreground">{siteConfig.company.city}'s #1 Family-Safe Pest Control</span>
             </div>
 
             <h1
@@ -33,35 +33,39 @@ const HeroSection = () => {
             >
               Protect What
               <br />
-              <span className="text-gold">Matters Most</span>
+              <span className="text-accent">Matters Most</span>
             </h1>
 
             <p className="animate-blur-up delay-200 mt-6 text-lg md:text-xl text-dark-foreground/70 max-w-lg mx-auto lg:mx-0 leading-relaxed">
-              Family &amp; pet-friendly pest protection backed by our 100% money-back guarantee. Locally owned, deeply trusted.
+              Family &amp; pet-friendly pest protection backed by our Happiness Promise. Locally owned, deeply trusted.
             </p>
 
             <div className="animate-blur-up delay-300 flex flex-wrap items-center gap-6 mt-8 justify-center lg:justify-start">
               <div className="flex items-center gap-1.5">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-5 h-5 fill-gold text-gold" />
+                {[...Array(Math.floor(siteConfig.reviews.averageRating))].map((_, i) => (
+                  <Star key={i} className="w-5 h-5 fill-accent text-accent" />
                 ))}
-                <span className="text-dark-foreground/80 text-sm ml-2">4.9/5 on Google</span>
+                {(siteConfig.reviews.averageRating % 1 !== 0) && <Star className="w-5 h-5 fill-accent/50 text-accent" />}
+                <span className="text-dark-foreground/80 text-sm ml-2">{siteConfig.reviews.averageRating}/5 on Google</span>
               </div>
-              <div className="text-dark-foreground/60 text-sm">500+ Reviews</div>
+              <div className="text-dark-foreground/60 text-sm">{siteConfig.reviews.totalReviews.toLocaleString()}+ Reviews</div>
             </div>
 
             <a
-              href="tel:5125551234"
-              className="animate-blur-up delay-400 mt-8 inline-flex items-center gap-2 text-gold font-semibold text-lg hover:underline md:hidden"
+              href={`tel:${siteConfig.company.phone.replace(/\D/g, "")}`}
+              className="animate-blur-up delay-400 mt-8 inline-flex items-center gap-2 text-accent font-semibold text-lg hover:underline transition-colors duration-200 cursor-pointer md:hidden"
             >
               <Phone className="w-5 h-5" />
-              Call Now: (512) 555-1234
+              Call Now: {siteConfig.company.phone}
             </a>
           </div>
 
           {/* Right - Glass form */}
           <div className="animate-blur-up delay-300">
             <div className="glass-dark rounded-2xl p-8 md:p-10 max-w-md mx-auto lg:ml-auto">
+              <div className="bg-green-500/20 text-green-400 border border-green-500/30 text-xs font-bold px-3 py-1.5 rounded-full w-fit mb-5 flex items-center gap-2">
+                <Shield className="w-3.5 h-3.5" /> 100% Pet & Family Safe
+              </div>
               <h2 className="font-display text-2xl md:text-3xl text-dark-foreground mb-2">
                 Get a Free Quote
               </h2>
@@ -81,7 +85,7 @@ const HeroSection = () => {
                   placeholder="Your Name"
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full px-4 py-3.5 rounded-xl bg-dark-foreground/10 border border-dark-foreground/15 text-dark-foreground placeholder:text-dark-foreground/40 focus:outline-none focus:border-gold/50 focus:ring-1 focus:ring-gold/30 transition-all"
+                  className="w-full px-4 py-3.5 rounded-xl bg-background/80 border border-border/50 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/30 transition-all font-medium"
                   required
                 />
                 <input
@@ -89,27 +93,23 @@ const HeroSection = () => {
                   placeholder="Phone Number"
                   value={formData.phone}
                   onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                  className="w-full px-4 py-3.5 rounded-xl bg-dark-foreground/10 border border-dark-foreground/15 text-dark-foreground placeholder:text-dark-foreground/40 focus:outline-none focus:border-gold/50 focus:ring-1 focus:ring-gold/30 transition-all"
+                  className="w-full px-4 py-3.5 rounded-xl bg-background/80 border border-border/50 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/30 transition-all font-medium"
                   required
                 />
                 <select
                   value={formData.pest}
                   onChange={(e) => setFormData({ ...formData, pest: e.target.value })}
-                  className="w-full px-4 py-3.5 rounded-xl bg-dark-foreground/10 border border-dark-foreground/15 text-dark-foreground focus:outline-none focus:border-gold/50 focus:ring-1 focus:ring-gold/30 transition-all appearance-none"
+                  className="w-full px-4 py-3.5 rounded-xl bg-background/80 border border-border/50 text-foreground focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/30 transition-all duration-200 cursor-pointer appearance-none font-medium"
                   required
                 >
                   <option value="" className="text-foreground">Select Pest Type</option>
-                  <option value="ants" className="text-foreground">Ants</option>
-                  <option value="roaches" className="text-foreground">Roaches</option>
-                  <option value="spiders" className="text-foreground">Spiders</option>
-                  <option value="mosquitoes" className="text-foreground">Mosquitoes</option>
-                  <option value="termites" className="text-foreground">Termites</option>
-                  <option value="rodents" className="text-foreground">Rodents</option>
-                  <option value="other" className="text-foreground">Other</option>
+                  {siteConfig.services.map(s => (
+                    <option key={s.id} value={s.id} className="text-foreground">{s.formLabel}</option>
+                  ))}
                 </select>
                 <button
                   type="submit"
-                  className="w-full py-4 rounded-xl bg-accent text-accent-foreground font-bold text-base hover:brightness-110 transition-all shadow-lg shadow-accent/20"
+                  className="w-full py-4 rounded-xl bg-accent text-accent-foreground font-bold text-base hover:brightness-110 transition-all duration-300 cursor-pointer shadow-lg shadow-accent/20"
                 >
                   Get My Free Quote →
                 </button>

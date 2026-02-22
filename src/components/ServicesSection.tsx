@@ -1,14 +1,5 @@
-import { Bug, TreeDeciduous, Rat, Droplets, Home, Zap } from "lucide-react";
 import { useEffect, useRef } from "react";
-
-const services = [
-  { icon: Bug, title: "General Pest Control", desc: "Ants, roaches, spiders, and more—gone for good." },
-  { icon: TreeDeciduous, title: "Termite Protection", desc: "Advanced barrier treatments to save your biggest investment." },
-  { icon: Droplets, title: "Mosquito Control", desc: "Reclaim your backyard with seasonal treatment plans." },
-  { icon: Rat, title: "Rodent Exclusion", desc: "Humane removal and permanent entry-point sealing." },
-  { icon: Home, title: "Home Sealing", desc: "Comprehensive exclusion to stop pests before they start." },
-  { icon: Zap, title: "Emergency Service", desc: "Same-day response for urgent pest situations." },
-];
+import { siteConfig } from "@/config";
 
 const ServicesSection = () => {
   const ref = useRef<HTMLDivElement>(null);
@@ -30,22 +21,22 @@ const ServicesSection = () => {
             Our Services
           </h2>
           <p className="reveal text-muted-foreground text-lg max-w-xl mx-auto" style={{ transitionDelay: "0.1s" }}>
-            Comprehensive pest solutions tailored for Austin homes and businesses.
+            Comprehensive pest solutions tailored for {siteConfig.company.city} homes and businesses.
           </p>
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {services.map((s, i) => (
+          {siteConfig.services.map((s, i) => (
             <div
               key={s.title}
-              className="reveal group p-7 rounded-2xl border border-border bg-card hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+              className="reveal group p-7 rounded-2xl border border-border bg-card hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer"
               style={{ transitionDelay: `${i * 0.08 + 0.1}s` }}
             >
               <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary/20 transition-colors">
                 <s.icon className="w-6 h-6 text-primary" />
               </div>
               <h3 className="font-display text-xl text-foreground mb-2">{s.title}</h3>
-              <p className="text-muted-foreground text-sm leading-relaxed">{s.desc}</p>
+              <p className="text-muted-foreground text-sm leading-relaxed">{s.description}</p>
             </div>
           ))}
         </div>

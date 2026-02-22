@@ -1,32 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { ChevronDown } from "lucide-react";
-
-const faqs = [
-  {
-    q: "Is your pest treatment safe for kids and pets?",
-    a: "Absolutely. We use EPA-approved, family-friendly products that are tough on pests but gentle around children, pets, and your garden. Our technicians will walk you through every product we use before treatment begins.",
-  },
-  {
-    q: "How does your 100% money-back guarantee work?",
-    a: "If pests return between scheduled treatments, we'll come back and re-treat at no extra charge. If you're still not satisfied, we'll refund your last service payment—no questions asked.",
-  },
-  {
-    q: "How quickly can you get to my home?",
-    a: "We offer same-day service for emergencies and typically schedule routine inspections within 24–48 hours. We serve Austin, Round Rock, Cedar Park, Pflugerville, and all surrounding communities.",
-  },
-  {
-    q: "What pests are most common in Austin?",
-    a: "Austin homeowners most frequently deal with fire ants, roaches (especially smoky browns), scorpions, mosquitoes, termites, and rodents. Our treatment plans are specifically designed for Central Texas pest pressure.",
-  },
-  {
-    q: "Do I need to leave my house during treatment?",
-    a: "For most treatments, no. Our eco-friendly products allow you to stay home comfortably. For specific services like termite fumigation, we'll let you know in advance if any preparation is needed.",
-  },
-  {
-    q: "How often should I schedule pest control service?",
-    a: "We recommend quarterly treatments for year-round protection in the Austin climate. However, we'll customize a plan based on your property, pest history, and budget during your free inspection.",
-  },
-];
+import { siteConfig } from "@/config";
 
 const FAQSection = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
@@ -49,12 +23,12 @@ const FAQSection = () => {
             Frequently Asked Questions
           </h2>
           <p className="reveal text-muted-foreground text-lg" style={{ transitionDelay: "0.1s" }}>
-            Everything Austin homeowners want to know before booking.
+            Everything {siteConfig.company.city} homeowners want to know before booking.
           </p>
         </div>
 
         <div className="space-y-3">
-          {faqs.map((faq, i) => {
+          {siteConfig.faqs.map((faq, i) => {
             const isOpen = openIndex === i;
             return (
               <div
@@ -64,7 +38,7 @@ const FAQSection = () => {
               >
                 <button
                   onClick={() => setOpenIndex(isOpen ? null : i)}
-                  className="w-full flex items-center justify-between gap-4 p-5 md:p-6 text-left"
+                  className="w-full flex items-center justify-between gap-4 p-5 md:p-6 text-left cursor-pointer"
                 >
                   <span className="font-semibold text-foreground text-sm md:text-base">{faq.q}</span>
                   <ChevronDown

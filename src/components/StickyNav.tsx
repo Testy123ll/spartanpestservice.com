@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Phone, Menu, X } from "lucide-react";
+import { siteConfig } from "@/config";
 
 const navLinks = [
   { label: "Services", href: "#services" },
@@ -31,14 +32,14 @@ const StickyNav = () => {
         {/* Logo */}
         <a href="#" className="flex items-center gap-2">
           <div className="w-9 h-9 rounded-full bg-primary flex items-center justify-center">
-            <span className="text-primary-foreground font-display text-lg">S</span>
+            <span className="text-primary-foreground font-display font-bold text-lg">{siteConfig.company.shortName.charAt(0)}</span>
           </div>
           <span
             className={`font-display text-xl transition-colors duration-300 ${
               scrolled ? "text-foreground" : "text-dark-foreground"
             }`}
           >
-            Shield Pest
+            {siteConfig.company.shortName}
           </span>
         </a>
 
@@ -48,7 +49,7 @@ const StickyNav = () => {
             <a
               key={link.label}
               href={link.href}
-              className={`text-sm font-medium transition-colors duration-300 hover:text-accent ${
+              className={`text-sm font-medium transition-colors duration-200 cursor-pointer hover:text-accent ${
                 scrolled ? "text-foreground" : "text-dark-foreground"
               }`}
             >
@@ -60,23 +61,23 @@ const StickyNav = () => {
         {/* Phone + CTA */}
         <div className="flex items-center gap-3">
           <a
-            href="tel:5125551234"
+            href={`tel:${siteConfig.company.phone.replace(/\D/g, "")}`}
             className={`hidden sm:flex items-center gap-2 text-sm font-semibold transition-colors duration-300 ${
-              scrolled ? "text-primary" : "text-gold"
+              scrolled ? "text-primary" : "text-accent"
             }`}
           >
             <Phone className="w-4 h-4" />
-            (512) 555-1234
+            {siteConfig.company.phone}
           </a>
           <a
             href="#contact"
-            className="hidden md:inline-flex px-5 py-2.5 rounded-full bg-accent text-accent-foreground font-semibold text-sm hover:brightness-110 transition-all"
+            className="hidden md:inline-flex px-5 py-2.5 rounded-full bg-accent text-accent-foreground font-semibold text-sm hover:brightness-110 transition-all duration-300 cursor-pointer"
           >
             Free Quote
           </a>
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className={`md:hidden p-2 transition-colors ${
+            className={`md:hidden p-2 transition-colors duration-200 cursor-pointer ${
               scrolled ? "text-foreground" : "text-dark-foreground"
             }`}
           >
@@ -99,11 +100,11 @@ const StickyNav = () => {
             </a>
           ))}
           <a
-            href="tel:5125551234"
+            href={`tel:${siteConfig.company.phone.replace(/\D/g, "")}`}
             className="flex items-center gap-2 text-primary font-semibold mt-4"
           >
             <Phone className="w-4 h-4" />
-            (512) 555-1234
+            {siteConfig.company.phone}
           </a>
         </div>
       )}
