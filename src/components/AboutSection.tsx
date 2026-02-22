@@ -22,7 +22,7 @@ const AboutSection = () => {
           <div className="order-2 lg:order-1 relative">
             <div className="reveal absolute -inset-4 bg-primary/10 rounded-3xl transform -rotate-3 transition-transform duration-500 hover:rotate-0"></div>
             <img
-              src={siteConfig.about.image}
+              src={((siteConfig as any).about?.image || "")}
               alt="About Us"
               className="reveal relative rounded-2xl shadow-2xl object-cover h-[500px] w-full"
             />
@@ -30,17 +30,17 @@ const AboutSection = () => {
           
           <div className="order-1 lg:order-2">
             <h2 className="reveal font-display text-3xl md:text-5xl text-foreground mb-6">
-              {siteConfig.about.sectionTitle}
+              {((siteConfig as any).about?.sectionTitle || "About Us")}
             </h2>
             <h3 className="reveal text-2xl text-foreground/90 font-medium mb-4" style={{ transitionDelay: "0.1s" }}>
-              {siteConfig.about.headline}
+              {((siteConfig as any).about?.headline || "")}
             </h3>
             <p className="reveal text-muted-foreground text-lg leading-relaxed mb-8" style={{ transitionDelay: "0.2s" }}>
-              {siteConfig.about.description}
+              {((siteConfig as any).about?.description || "")}
             </p>
             
             <div className="grid sm:grid-cols-2 gap-4">
-              {siteConfig.guarantees.map((guarantee, i) => (
+              {(((siteConfig as any).guarantees || siteConfig.trustBadges || []) as any[]).map((guarantee, i) => (
                 <div 
                   key={guarantee.title} 
                   className="reveal flex items-start gap-3"

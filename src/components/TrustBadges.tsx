@@ -34,7 +34,7 @@ const TrustBadges = () => {
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {siteConfig.trustBadges.map((badge, i) => (
+          {((siteConfig.trustBadges || (siteConfig as any).guarantees || []) as any[]).map((badge, i) => (
             <div
               key={badge.title}
               className="reveal group p-7 rounded-2xl bg-primary-foreground/5 border border-primary-foreground/10 hover:bg-primary-foreground/10 transition-all duration-300 cursor-pointer"

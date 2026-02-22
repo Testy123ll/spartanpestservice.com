@@ -10,9 +10,12 @@ const HeroSection = () => {
       {/* Background image */}
       <div className="absolute inset-0">
         <img
-          src={siteConfig.media.heroImage}
-          alt={`Beautiful ${siteConfig.company.state} backyard with family enjoying pest-free outdoor living`}
+          src={(siteConfig.media?.heroImage || (siteConfig as any).hero?.image || "")}
+          alt={`Beautiful ${siteConfig.company.city || siteConfig.company.state || 'local'} backyard with family enjoying pest-free outdoor living`}
           className="w-full h-full object-cover"
+          onError={(e) => {
+            e.currentTarget.src = "https://images.unsplash.com/photo-1556910103-1c02745a872e?auto=format&fit=crop&q=80";
+          }}
         />
         <div className="absolute inset-0 bg-gradient-to-r from-dark/70 via-dark/40 to-dark/60" />
         <div className="absolute inset-0 bg-gradient-to-t from-dark/80 via-transparent to-dark/30" />
